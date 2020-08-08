@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  node-ex-app-docker-compose:
+    image: node-ex-app-docker-compose
+    build: .
+    environment:
+      NODE_ENV: development
+    ports:
+      - 3000
+      - 9229:9229
+    command: node --inspect=0.0.0.0:9229 ./bin/www
+  db:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    environment:
+        SA_PASSWORD: "P@ssw0rd"
+        ACCEPT_EULA: "Y"
+    ports:
+      - 1433
